@@ -7,8 +7,8 @@ class CellBox extends Entity {
 	int i; int k; int j;
 	int count;
 
-	int tickRate = 10;
-	float cellVMult = 0.5;
+	int tickRate = 3;
+	float cellVMult = 0.1;
 	float cellMass = 5;
 
 	int aliveMin = 4; int aliveMax = 7;
@@ -26,7 +26,8 @@ class CellBox extends Entity {
 			for (k = 0 ; k < y ; k ++) {
 				cells[i][k] = new Cell[z];
 				for (j = 0 ; j < z ; j ++) {
-					cells[i][k][j] = new Cell((float)i/x*125+125, (float)k/y*255, 255-(float)j/z*255);
+					cells[i][k][j] = new Cell((float)i/x*125+125, (float)k/y*255, 255-(float)j/z*255,
+						5,5,5, (i*x+k*y+j)%binCount);
 				}
 			}
 		}
@@ -47,8 +48,8 @@ class CellBox extends Entity {
 		boolean next = false;
 		IColor fillStyle;
 
-		Cell(float r, float g, float b) {
-			fillStyle = new IColor(r,g,b,255);
+		Cell(float r, float g, float b, float rm, float gm, float bm, float index) {
+			fillStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
 		}
 
 		void update() {
@@ -87,6 +88,7 @@ class CellBox extends Entity {
 		for (i = 1 ; i < x-1 ; i ++) {
 			for (k = 1 ; k < y-1 ; k ++) {
 				for (j = 1 ; j < z-1 ; j ++) {
+					if (av[cells[i][k][j].fillStyle.index] > 15) cells[i][k][j].alive = true;
 					updateCell();
 				}
 			}

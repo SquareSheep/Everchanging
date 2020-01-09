@@ -16,8 +16,8 @@ Even: snare/clap thing
 
 96-124
 124-128
-
 */
+
 class FlashCut extends Event {
 	Rect[][] ar = new Rect[6][];
 	float w;
@@ -91,10 +91,10 @@ class FlashCut extends Event {
 	}
 }
 
-class setDraws extends Event {
+class SetDraws extends Event {
 	boolean cell; boolean cube; boolean hollow; boolean ring;
 
-	setDraws(float time, boolean cell, boolean cube, boolean hollow, boolean ring) {
+	SetDraws(float time, boolean cell, boolean cube, boolean hollow, boolean ring) {
 		super(time, time+1);
 		this.cell = cell;
 		this.cube = cube;
@@ -110,13 +110,66 @@ class setDraws extends Event {
 	}
 }
 
-class cubeBoxShiftCubes extends Event {
+class CubeShiftNotes extends Event {
+	float start;
+	int d = (int)(fpb/3);
 
-	cubeBoxShiftCubes(float time) {
-		super(time, time+1);
+	CubeShiftNotes(float time) {
+		super(time, time+1.5);
 	}
 
 	void spawn() {
-		cubeBox.shiftCubes();
+		start = frameCount;
+	}
+
+	void update() {
+		if (frameCount-start == d*1) cubeBox.shiftCubes();
+		if (frameCount-start == d*2) cubeBox.shiftCubes();
+		if (frameCount-start == d*3) cubeBox.shiftCubes();
+		if (frameCount-start == d*4) cubeBox.shiftCubes();
+		if (frameCount-start == d*5) cubeBox.shiftCubes();
+		if (frameCount-start == d*6) cubeBox.shiftCubes();
+		if (frameCount-start == d*7) cubeBox.shiftCubes();
+	}
+}
+
+class CameraPAdd extends Event {
+	float x; float y; float z;
+
+	CameraPAdd(float time, float x, float y, float z) {
+		super(time, time+1);
+		this.x = x; this.y = y; this.z = z;
+	}
+
+	void spawn() {
+		cam.ang.p.add(x,y,z);
+		cam.ang.P.add(x,y,z);
+	}
+}
+
+class CameraPSet extends Event {
+	float x; float y; float z;
+
+	CameraPSet(float time, float x, float y, float z) {
+		super(time, time+1);
+		this.x = x; this.y = y; this.z = z;
+	}
+
+	void spawn() {
+		cam.ang.p.set(x,y,z);
+		cam.ang.P.set(x,y,z);
+	}
+}
+
+class CameraAngV extends Event {
+	float x; float y; float z;
+
+	CameraAngV(float time, float timeEnd, float x, float y, float z) {
+		super(time, timeEnd);
+		this.x = x; this.y = y; this.z = z;
+	}
+
+	void update() {
+		cam.ang.P.add(x,y,z);
 	}
 }

@@ -46,7 +46,7 @@ void setup() {
   fft = new FFT(song.bufferSize(), song.sampleRate());
 
   timer = new BeatTimer(threshold,offset,bpm);
-  fpb = 3600/bpm;
+  fpb = 3600.0/bpm;
   
   song.loop();
   song.setGain(volumeGain);

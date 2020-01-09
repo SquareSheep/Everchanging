@@ -34,4 +34,9 @@ class HollowCellBox extends Entity {
 		pop();
 	}
 
+	void setRandom() {
+		for (int i = 0 ; i < boxes.length ; i ++) {
+			boxes[i].setRandom();
+		}
+	}
 }
