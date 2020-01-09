@@ -79,10 +79,6 @@ class CubeShiftBox extends Entity {
 	void render() {
 		push();
 		translate(p.p.x, p.p.y, p.p.z);
-		stroke(255);
-		noFill();
-		box(w.p.x*x, w.p.y*y, w.p.z*z);
-		noStroke();
 		for (Cube mob : cubes) {
 			mob.render();
 		}

@@ -31,10 +31,10 @@ char keyR;
 char keyP;
 
 void setup() {
-  size(200,200,P3D);
+  size(1280,960,P3D);
   de = (int)(width*0.5+height*0.5);
 
-  cam = new Camera(width/2,height/2,-de*1.2, 0,0,0);
+  cam = new Camera(de/2,de/2,-de, 0,0,0);
 
   textSize(de/10);
 
@@ -151,22 +151,27 @@ void calcFFT() {
   }
 }
 
-void mousePressed() {
-  float temp = ((float)mouseX / width) * song.length();
-  float tempBeat = ((temp+timer.offset)/60000.0*bpm);
-  tempBeat = tempBeat - tempBeat%0.5;
-  println(tempBeat);
+void mousePressed() {}
+
+void setTime(float time) {
+  float beat = ((time-timer.offset)/60000.0*bpm);
+  beat = beat - beat%0.5;
+  setTime(time, beat);
+}
+
+void setTime(float time, float beat) {
   for (Event event : events) {
-    if (tempBeat <= event.time) {
+    if (beat <= event.time) {
       event.spawned = false;
       event.finished = false;
     }
     if (currBeat >= event.time && currBeat < event.timeEnd) {
-      if (tempBeat < event.time || tempBeat >= event.timeEnd) event.end();
+      if (beat < event.time || beat >= event.timeEnd) event.end();
     }
   }
-  song.cue((int)temp);
-  currBeat = tempBeat;
+  song.cue((int)time);
+  currBeat = beat;
+  timer.resetBooleans();
 }
 
 void keyPressed() {

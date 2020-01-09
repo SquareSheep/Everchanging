@@ -1,6 +1,7 @@
 class CellBox extends Entity {
 	Point p;
 	Point w;
+	PVector wc;
 	Cell[][][] cells;
 	int x; int y; int z;
 	int i; int k; int j;
@@ -15,7 +16,7 @@ class CellBox extends Entity {
 
 	CellBox(PVector p, float w, int x, int y, int z) {
 		this.p = new Point(p);
-		this.w = new Point(w/x,w/y,w/z);
+		this.w = new Point(w,w,w);
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -29,6 +30,14 @@ class CellBox extends Entity {
 				}
 			}
 		}
+	}
+
+	CellBox(PVector p, float w, int x, int y, int z, int aliveMin, int aliveMax, int spawnMin, int spawnMax) {
+		this(p,w,x,y,z);
+		this.aliveMin = aliveMin;
+		this.aliveMax = aliveMax;
+		this.spawnMin = spawnMin;
+		this.spawnMax = spawnMax;
 	}
 
 	class Cell extends Entity {
@@ -48,7 +57,6 @@ class CellBox extends Entity {
 		}
 
 		void render() {
-			noStroke();
 			fillStyle.fillStyle();
 			scale(sca.x);
 			switch (currShape) {
