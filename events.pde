@@ -1,23 +1,3 @@
-/*
-
-0-32 "Don't you, don't you"
-Even: snare/clap thing
-
-
-33-63
-8 beat phrases
-
-64-65 "beat, beat, beat"
-
-65-92
-8 beat phrases
-1st: 4 beat lyrics
-2nd: 4 beat shift cubes
-
-96-124
-124-128
-*/
-
 class FlashCut extends Event {
 	Rect[][] ar = new Rect[6][];
 	float w;
