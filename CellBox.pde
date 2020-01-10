@@ -14,6 +14,9 @@ class CellBox extends Entity {
 	int aliveMin = 4; int aliveMax = 7;
 	int spawnMin = 5; int spawnMax = 5;
 
+	boolean cellReact = true;
+	float threshold = 15;
+
 	CellBox(PVector p, float w, int x, int y, int z) {
 		this.p = new Point(p);
 		this.w = new Point(w,w,w);
@@ -88,7 +91,7 @@ class CellBox extends Entity {
 		for (i = 1 ; i < x-1 ; i ++) {
 			for (k = 1 ; k < y-1 ; k ++) {
 				for (j = 1 ; j < z-1 ; j ++) {
-					if (av[cells[i][k][j].fillStyle.index] > 15) cells[i][k][j].alive = true;
+					if (cellReact && av[cells[i][k][j].fillStyle.index] > threshold) cells[i][k][j].alive = true;
 					updateCell();
 				}
 			}

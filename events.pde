@@ -113,6 +113,16 @@ class CubeShiftNotes extends Event {
 	}
 }
 
+class HollowSetRandom extends Event {
+	HollowSetRandom(float time) {
+		super(time, time+1);
+	}
+
+	void spawn() {
+		hollowBox.setRandom();
+	}
+}
+
 class CameraPAdd extends Event {
 	float x; float y; float z;
 

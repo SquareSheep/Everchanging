@@ -56,10 +56,12 @@ void addEvents() {
 	events.add(new SetDraws(96.5,false,false,false,true));
 
 	events.add(new SetDraws(101,false,false,true,false));
+	events.add(new HollowSetRandom(101));
 	events.add(new SetDraws(103,false,false,false,true));
 	events.add(new SetDraws(109,true,false,false,false));
 	events.add(new SetDraws(113,false,false,false,true));
 	events.add(new SetDraws(117,false,false,true,false));
+	events.add(new HollowSetRandom(117));
 	events.add(new SetDraws(119,false,false,false,true));
 
 	events.add(new SetDraws(124,false,true,false,false));

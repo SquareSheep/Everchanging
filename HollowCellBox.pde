@@ -7,6 +7,7 @@ class HollowCellBox extends Entity {
 		for (int i = 0 ; i < boxes.length ; i ++) {
 			boxes[i] = new CellBox(new PVector(0,0,w/2), w/x, x,x,3, aliveMin, aliveMax, spawnMin, spawnMax);
 			boxes[i].tickRate = 12;
+			boxes[i].cellReact = false;
 		}
 	}
 
