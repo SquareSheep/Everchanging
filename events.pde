@@ -14,7 +14,7 @@ class FlashCut extends Event {
 	}
 
 	FlashCut(float time) {
-		this(time, size);
+		this(time, wireBox.w);
 	}
 
 	class Rect {

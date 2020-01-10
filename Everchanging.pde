@@ -57,6 +57,8 @@ void setup() {
 
 void draw() {
   background(0);
+  wireBox.update();
+  if (wireBox.draw) wireBox.render();
   cam.render();
   update();
 

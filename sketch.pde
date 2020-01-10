@@ -20,6 +20,7 @@ CellBox cellBox;
 CubeShiftBox cubeBox;
 HollowCellBox hollowBox;
 PitchBall ball;
+WireFrameBox wireBox;
 
 static float size;
 
@@ -79,6 +80,7 @@ void addEvents() {
 	events.add(new CameraAngV(129,177, 0,0.0003,-0.004));
 	for (int i = 0 ; i < 8 ; i ++) {
 		events.add(new SetDraws(129+i*4,false,true,false,false));
+		events.add(new FlashCut(129+i*4));
 		events.add(new CameraPAdd(129+i*4, 0.5,0.5,0.5));
 		events.add(new CubeShiftNotes(129+i*4));
 		events.add(new SetDraws(130.5+i*4,false,false,false,true));
@@ -109,6 +111,10 @@ void setSketch() {
 
   	ball = new PitchBall(new PVector(0,0,0), size/200);
   	mobs.add(ball);
+
+  	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3.75);
+  	//wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
+  	//mobs.add(wireBox);
 
   	setTime(44141,62);
 }
