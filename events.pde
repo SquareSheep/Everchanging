@@ -93,9 +93,20 @@ class SetDraws extends Event {
 class CubeShiftNotes extends Event {
 	float start;
 	int d = (int)(fpb/3);
+	int num;
+
+	CubeShiftNotes(float time, float duration, float d, int num) {
+		super(time, time+duration);
+		this.d = (int)(fpb/d);
+		this.num = num;
+	}
+
+	CubeShiftNotes(float time, float duration, int num) {
+		this(time, duration, 3, num);
+	}
 
 	CubeShiftNotes(float time) {
-		super(time, time+1.5);
+		this(time, 1.5, 3, 7);
 	}
 
 	void spawn() {
@@ -103,13 +114,9 @@ class CubeShiftNotes extends Event {
 	}
 
 	void update() {
-		if (frameCount-start == d*1) cubeBox.shiftCubes();
-		if (frameCount-start == d*2) cubeBox.shiftCubes();
-		if (frameCount-start == d*3) cubeBox.shiftCubes();
-		if (frameCount-start == d*4) cubeBox.shiftCubes();
-		if (frameCount-start == d*5) cubeBox.shiftCubes();
-		if (frameCount-start == d*6) cubeBox.shiftCubes();
-		if (frameCount-start == d*7) cubeBox.shiftCubes();
+		for (int i = 1 ; i <= num ; i ++) {
+			if (frameCount-start == d*i) cubeBox.shiftCubes();
+		}
 	}
 }
 

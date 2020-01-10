@@ -21,7 +21,7 @@ class PitchBall extends Entity {
 		Bar(PVector ang, float w, float r, float g, float b, float rm, float gm, float bm, float index) {
 			this.ang = new Point(ang);
 			this.dang = ang.copy();
-			float ampW = 3;
+			float ampW = 6;
 			this.w = new Point(w*ampW,w*ampW,w*ampW*10);
 			this.w.pm.set(w/10,w/10,w);
 			this.w.index = (int)index;

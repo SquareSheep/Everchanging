@@ -31,7 +31,7 @@ char keyR;
 char keyP;
 
 void setup() {
-  size(640,480,P3D);
+  size(1000,1000,P3D);
   de = (int)(width*0.5+height*0.5);
 
   cam = new Camera(de/2,de/2,-de, 0,0,0);
@@ -70,10 +70,10 @@ void draw() {
   //drawBorders();
   //drawWidthBox(de);
   //drawPitches();
-  push();
-  translate(0,de*0.75,0);
-  text(currBeat + " " + (int)frameRate,0,0);
-  pop();
+  // push();
+  // translate(0,de*0.75,0);
+  // text(currBeat + " " + (int)frameRate,0,0);
+  // pop();
 }
 
 void update() {
