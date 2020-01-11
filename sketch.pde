@@ -10,7 +10,7 @@ static float fillVMult = 0.5;
 static float fftThreshold = 1.2;
 static float fftPow = 1.1;
 static float fftAmp = 2;
-static float volumeGain = -25;
+static float volumeGain = -10;
 static String songName = "../Music/everchanging.mp3";
 
 IColor defaultFill = new IColor(222,125,222,255);
@@ -60,6 +60,7 @@ void addEvents() {
 	events.add(new SetDraws(101,false,false,true,false));
 	events.add(new CameraPSet(101, 0,1.2,0.1));
 	events.add(new HollowSetRandom(101));
+	events.add(new HollowSetRandom(102));
 	events.add(new SetDraws(103,false,false,false,true));
 	events.add(new CameraPSet(103, 0,0,0));
 	events.add(new SetDraws(109,true,false,false,false));
@@ -94,7 +95,7 @@ void addEvents() {
 void setSketch() {
 	front = new PVector(de*2,de,de*0.2);
   	back = new PVector(-de*2,-de,-de*2);
-  	size = width*0.5+height*0.5;
+  	size = de*0.8;
   	textSize(90);
   	noiseSeed(0);
   	stroke(0);
@@ -106,13 +107,13 @@ void setSketch() {
   	cubeBox = new CubeShiftBox(new PVector(0,0,0), size,8,8,8, 175);
   	mobs.add(cubeBox);
 
-  	hollowBox = new HollowCellBox(new PVector(0,0,0), size, 8, 2,3,3,3);
+  	hollowBox = new HollowCellBox(new PVector(0,0,0), size, 10, 2,3,3,3);
   	mobs.add(hollowBox);
 
-  	ball = new PitchBall(new PVector(0,0,0), size/200);
+  	ball = new PitchBall(new PVector(0,0,0), size/150);
   	mobs.add(ball);
 
-  	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3.75);
+  	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
   	//wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
   	//mobs.add(wireBox);
 

@@ -1,7 +1,7 @@
 class WireFrameBox extends Mob {
 
 	int mode = 0;
-	SpringValue[] ar = new SpringValue[15];
+	SpringValue[] ar = new SpringValue[16];
 
 	WireFrameBox(PVector p, float w) {
 		this.p = new Point(p);
@@ -23,20 +23,20 @@ class WireFrameBox extends Mob {
 		setDraw();
 		switch(mode) {
 			case 0:
-			stroke(175,25,255);
-			drawGridBox(10);
+			stroke(100,25,175);
+			drawGridBox(5);
 			break;
 			case 1:
-			stroke(255,25,155);
-			drawGridBox(12);
+			stroke(175,15,75);
+			drawGridBox(7);
 			break;
 			case 2:
-			stroke(255);
+			stroke(125);
 			drawGridBox(6);
 			break;
 			case 3:
-			stroke(25,125,25);
-			drawGridBox(15);
+			stroke(25,75,25);
+			drawGridBox(8);
 			drawVisualizerBars(75,255,75);
 			break;
 		}
