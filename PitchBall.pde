@@ -44,7 +44,7 @@ class PitchBall extends Entity {
 		translate(p.p.x,p.p.y,p.p.z);
 		for (int i = 0 ; i < ar.length ; i ++) {
 			push();
-			ar[i].fillStyle.fillStyle();
+			ar[i].fillStyle.strokeStyle();
 			rotateX(ar[i].ang.p.x);
 			rotateY(ar[i].ang.p.y);
 			rotateZ(ar[i].ang.p.z);

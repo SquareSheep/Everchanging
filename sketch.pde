@@ -8,9 +8,9 @@ static float defaultVMult = 0.5;
 static float fillMass = 10;
 static float fillVMult = 0.5;
 static float fftThreshold = 1.2;
-static float fftPow = 1.3;
-static float fftAmp = 4;
-static float volumeGain = -10;
+static float fftPow = 1.1;
+static float fftAmp = 2;
+static float volumeGain = -25;
 static String songName = "../Music/everchanging.mp3";
 
 IColor defaultFill = new IColor(222,125,222,255);
@@ -80,7 +80,6 @@ void addEvents() {
 	events.add(new CameraAngV(129,177, 0,0.0003,-0.004));
 	for (int i = 0 ; i < 8 ; i ++) {
 		events.add(new SetDraws(129+i*4,false,true,false,false));
-		events.add(new FlashCut(129+i*4));
 		events.add(new CameraPAdd(129+i*4, 0.5,0.5,0.5));
 		events.add(new CubeShiftNotes(129+i*4));
 		events.add(new SetDraws(130.5+i*4,false,false,false,true));
@@ -99,6 +98,7 @@ void setSketch() {
   	textSize(90);
   	noiseSeed(0);
   	stroke(0);
+  	strokeWeight(5);
 
   	cellBox = new CellBox(new PVector(0,0,0),size/6,8,8,8, 3,7,5,5);
   	mobs.add(cellBox);

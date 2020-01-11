@@ -163,19 +163,19 @@ abstract class Mob extends Entity {
   SpringValue sca = new SpringValue(1);
   Point ang;
   Point rang = new Point(0,0,0);
-  Point av = new Point(0,0,0);
+  Point angV = new Point(0,0,0);
   float w = 0;
   int lifeSpan = -1;
   
   void updatePoints() {
     p.P.add(pv.p);
-    ang.P.add(av.p);
+    ang.P.add(angV.p);
     p.update();
     pv.update();
     r.update();
     ang.update();
     rang.update();
-    av.update();
+    angV.update();
     sca.update();
   }
 
@@ -301,6 +301,12 @@ class SpringValue {
   float vMult;
   float mass;
   int index = -1;
+
+  SpringValue(float x, float X, float vMult, float mass, float xm, float index) {
+    this(x, X, vMult, mass);
+    this.index = (int)index;
+    this.xm = xm;
+  }
 
   SpringValue(float x, float X, float vMult, float mass) {
     this.x = x;

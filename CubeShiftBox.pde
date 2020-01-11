@@ -59,7 +59,7 @@ class CubeShiftBox extends Entity {
 
 		void render() {
 			push();
-			fillStyle.fillStyle();
+			fillStyle.strokeStyle();
 			translate(this.p.p.x,this.p.p.y,this.p.p.z);
 			scale(sca.x);
 			box(w.p.x,w.p.y,w.p.z);

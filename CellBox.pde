@@ -61,7 +61,7 @@ class CellBox extends Entity {
 		}
 
 		void render() {
-			fillStyle.fillStyle();
+			fillStyle.strokeStyle();
 			scale(sca.x);
 			switch (currShape) {
 				case 0:

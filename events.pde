@@ -73,6 +73,7 @@ class FlashCut extends Event {
 
 class SetDraws extends Event {
 	boolean cell; boolean cube; boolean hollow; boolean ring;
+	int mode;
 
 	SetDraws(float time, boolean cell, boolean cube, boolean hollow, boolean ring) {
 		super(time, time+1);
@@ -80,6 +81,10 @@ class SetDraws extends Event {
 		this.cube = cube;
 		this.hollow = hollow;
 		this.ring = ring;
+		if (cell) mode = 0;
+		if (cube) mode = 1;
+		if (hollow) mode = 2;
+		if (ring) mode = 3;
 	}
 
 	void spawn() {
@@ -87,6 +92,7 @@ class SetDraws extends Event {
 		cubeBox.draw = cube;
 		hollowBox.draw = hollow;
 		ball.draw = ring;
+		wireBox.mode = mode;
 	}
 }
 

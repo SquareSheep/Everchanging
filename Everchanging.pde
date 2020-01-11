@@ -31,10 +31,10 @@ char keyR;
 char keyP;
 
 void setup() {
-  size(1000,1000,P3D);
+  size(1280,960,P3D);
   de = (int)(width*0.5+height*0.5);
 
-  cam = new Camera(de/2,de/2,-de, 0,0,0);
+  cam = new Camera(width/2,height/2,-de);
 
   textSize(de/10);
 
@@ -63,7 +63,7 @@ void draw() {
   update();
 
   render();
-
+  fill(0);
   for (Entity mob : mobs) {
     if (mob.draw) mob.render();
   }
