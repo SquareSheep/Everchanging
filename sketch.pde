@@ -21,6 +21,10 @@ CubeShiftBox cubeBox;
 HollowCellBox hollowBox;
 PitchBall ball;
 WireFrameBox wireBox;
+ShapeTunnel cellTunnel;
+ShapeTunnel cubeTunnel;
+ShapeTunnel hollowTunnel;
+ShapeTunnel ballTunnel;
 
 static float size;
 
@@ -93,7 +97,7 @@ void addEvents() {
 }
 
 void setSketch() {
-	front = new PVector(de*2,de,de*0.2);
+	front = new PVector(de*2,de,de*1.5);
   	back = new PVector(-de*2,-de,-de*2);
   	size = de*0.8;
   	textSize(90);
@@ -101,21 +105,30 @@ void setSketch() {
   	stroke(0);
   	strokeWeight(5);
 
-  	cellBox = new CellBox(new PVector(0,0,0),size/6,8,8,8, 3,7,5,5);
-  	mobs.add(cellBox);
+  	// cellBox = new CellBox(new PVector(0,0,0),size/6,8,8,8, 3,7,5,5);
+  	// mobs.add(cellBox);
 
-  	cubeBox = new CubeShiftBox(new PVector(0,0,0), size,8,8,8, 175);
-  	mobs.add(cubeBox);
+  	// cubeBox = new CubeShiftBox(new PVector(0,0,0), size,8,8,8, 175);
+  	// mobs.add(cubeBox);
 
-  	hollowBox = new HollowCellBox(new PVector(0,0,0), size, 10, 2,3,3,3);
-  	mobs.add(hollowBox);
+  	// hollowBox = new HollowCellBox(new PVector(0,0,0), size, 10, 2,3,3,3);
+  	// mobs.add(hollowBox);
 
-  	ball = new PitchBall(new PVector(0,0,0), size/150);
-  	mobs.add(ball);
+  	// ball = new PitchBall(new PVector(0,0,0), size/150);
+  	// mobs.add(ball);
 
-  	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
-  	//wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
-  	//mobs.add(wireBox);
+  	// wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
+  	// wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
+  	// mobs.add(wireBox);
+  	float w = de*0.5;
+  	float wd = de*0.1;
+  	cellTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.012,de*0.006,
+  		125,125,125, 55,55,55, 5,5,5, 1,1,1);
+  	for (int i = 0 ; i < 255 ; i ++) {
+  		cellTunnel.add(random(-1,1));
+  	}
 
   	setTime(44141,62);
 }

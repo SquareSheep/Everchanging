@@ -36,15 +36,14 @@ abstract class ObjectPool<T extends Entity> extends Entity {
 
   // void set(Obj obj, [args]);
 
-  // void add(Obj obj, [args]) {
-  //   if (arm == ar.size()) {
-  //     ar.add(new Mob(p));
-  //   } else {
-  //     Mob mob = (Mob)ar.get(arm);
-  //   }
-  //   reset mob
-  //   arm ++;
+  // if (arm == ar.size()) {
+  //   ar.add(0,new Obj());
+  //   mob = ar.get(0);
+  // } else {
+  //   mob = ar.get(arm);
   // }
+  // set(mob, [args]);
+  // arm ++;
 
   void remove(int i) {
     ar.add(ar.remove(i));
@@ -264,6 +263,12 @@ class Point {
     this.index = (int)index;
   }
 
+  void reset(PVector p) {
+    this.p.set(p.x,p.y,p.z);
+    P.set(p.x,p.y,p.z);
+    v.set(0,0,0);
+  }
+
   void reset(float x, float y, float z) {
     p.set(x,y,z);
     P.set(x,y,z);
@@ -440,7 +445,12 @@ class IColor extends AColor {
   }
 
   void reset(float rc, float gc, float bc, float ac, float rm, float gm, float bm, float am, float index) {
-    set(rc,gc,bc,ac,rm,gm,bm,am,index);
+    reset(rc,gc,bc,ac,rm,gm,bm,am);
+    this.index = (int)index;
+  }
+
+  void reset(float rc, float gc, float bc, float ac, float rm, float gm, float bm, float am) {
+    set(rc,gc,bc,ac,rm,gm,bm,am);
     r.x = rc; g.x = gc; b.x = bc; a.x = ac;
   }
 }

@@ -81,10 +81,10 @@ class SetDraws extends Event {
 		this.cube = cube;
 		this.hollow = hollow;
 		this.ring = ring;
-		if (cell) mode = 0;
-		if (cube) mode = 1;
-		if (hollow) mode = 2;
-		if (ring) mode = 3;
+		// if (cell) mode = 0;
+		// if (cube) mode = 1;
+		// if (hollow) mode = 2;
+		// if (ring) mode = 3;
 	}
 
 	void spawn() {
@@ -92,7 +92,7 @@ class SetDraws extends Event {
 		cubeBox.draw = cube;
 		hollowBox.draw = hollow;
 		ball.draw = ring;
-		wireBox.mode = mode;
+		//wireBox.mode = mode;
 	}
 }
 

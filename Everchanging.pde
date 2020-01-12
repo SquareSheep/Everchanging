@@ -52,18 +52,20 @@ void setup() {
   song.setGain(volumeGain);
 
   setSketch();
-  addEvents();
+  //addEvents();
 }
 
 void draw() {
   background(0);
-  wireBox.update();
-  if (wireBox.draw) wireBox.render();
+  fill(0);
+  //wireBox.update();
+  //if (wireBox.draw) wireBox.render();
+  cellTunnel.update();
+  if (cellTunnel.draw) cellTunnel.render();
   cam.render();
   update();
 
   render();
-  fill(0);
   for (Entity mob : mobs) {
     if (mob.draw) mob.render();
   }
