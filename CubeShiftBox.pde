@@ -42,11 +42,13 @@ class CubeShiftBox extends Entity {
 		Point p = new Point();
 		SpringValue sca = new SpringValue(1);
 		IColor fillStyle;
+		IColor strokeStyle;
 		int x; int y; int z;
 
 		Cube(float r, float g, float b, int x, int y, int z) {
 			this.x = x; this.y = y; this.z = z;
-			fillStyle = new IColor(r,g,b,255);
+			fillStyle = new IColor();
+			strokeStyle = new IColor(r,g,b,255);
 			p.mass = cubeMass;
 			p.vMult = cubeVMult;
 		}
@@ -55,11 +57,13 @@ class CubeShiftBox extends Entity {
 			p.update();
 			sca.update();
 			fillStyle.update();
+			strokeStyle.update();
 		}
 
 		void render() {
 			push();
-			fillStyle.strokeStyle();
+			fillStyle.fillStyle();
+			strokeStyle.strokeStyle();
 			translate(this.p.p.x,this.p.p.y,this.p.p.z);
 			scale(sca.x);
 			box(w.p.x,w.p.y,w.p.z);

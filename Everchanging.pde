@@ -52,16 +52,23 @@ void setup() {
   song.setGain(volumeGain);
 
   setSketch();
-  //addEvents();
+  addEvents();
 }
 
 void draw() {
   background(0);
   fill(0);
-  //wireBox.update();
-  //if (wireBox.draw) wireBox.render();
+  wireBox.update();
+  if (wireBox.draw) wireBox.render();
   cellTunnel.update();
   if (cellTunnel.draw) cellTunnel.render();
+  cubeTunnel.update();
+  if (cubeTunnel.draw) cubeTunnel.render();
+  hollowTunnel.update();
+  if (hollowTunnel.draw) hollowTunnel.render();
+  ballTunnel.update();
+  if (ballTunnel.draw) ballTunnel.render();
+
   cam.render();
   update();
 

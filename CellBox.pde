@@ -50,18 +50,22 @@ class CellBox extends Entity {
 		boolean alive = false;
 		boolean next = false;
 		IColor fillStyle;
+		IColor strokeStyle;
 
 		Cell(float r, float g, float b, float rm, float gm, float bm, float index) {
-			fillStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
+			fillStyle = new IColor();
+			strokeStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
 		}
 
 		void update() {
 			sca.update();
 			fillStyle.update();
+			strokeStyle.update();
 		}
 
 		void render() {
-			fillStyle.strokeStyle();
+			fillStyle.fillStyle();
+			strokeStyle.strokeStyle();
 			scale(sca.x);
 			switch (currShape) {
 				case 0:
@@ -91,7 +95,7 @@ class CellBox extends Entity {
 		for (i = 1 ; i < x-1 ; i ++) {
 			for (k = 1 ; k < y-1 ; k ++) {
 				for (j = 1 ; j < z-1 ; j ++) {
-					if (cellReact && av[cells[i][k][j].fillStyle.index] > threshold) cells[i][k][j].alive = true;
+					if (cellReact && av[cells[i][k][j].strokeStyle.index] > threshold) cells[i][k][j].alive = true;
 					updateCell();
 				}
 			}

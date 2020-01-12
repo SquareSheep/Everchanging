@@ -91,7 +91,7 @@ class WireFrameBox extends Mob {
 		stroke(r,g,b);
 		translate(0,w/2,-w/2);
 		for (int i = 0 ; i < ar.length ; i ++) {
-			rect(((float)i/ar.length-0.5)*w+w/ar.length/2, -ar[i].x/2, w/ar.length, ar[i].x);
+			rect(((float)i/ar.length-0.5)*w+w/2/ar.length, -ar[i].x/2, w/ar.length, ar[i].x);
 		}
 		pop();
 	}

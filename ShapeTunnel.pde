@@ -10,7 +10,7 @@ class ShapeTunnel extends ObjectPool<Shape> {
 	float rm; float gm; float bm;
 	float rmd; float gmd; float bmd;
 	boolean spawn = true;
-	float wLimit = 0.25;
+	float wLimit = 0.75;
 
 	ShapeTunnel(PVector p, PVector w, PVector ws, PVector wd, float v, float vd, float r, float g, float b, 
 		float rd, float gd, float bd, float rm, float gm, float bm, float rmd, float gmd, float bmd) {
@@ -26,11 +26,11 @@ class ShapeTunnel extends ObjectPool<Shape> {
 		mob.draw = true;
 		mob.p.reset(x,y,z);
 		mob.w.reset(w,h,d);
-		mob.w.pm.set(w*0.01,h*0.01,d*0.01);
+		mob.w.pm.set(w*0.002,h*0.002,d*0.002);
 		mob.w.index = (int)random(binCount);
 		mob.ang.reset(random(-PI,PI),random(-PI,PI),random(-PI,PI));
-		mob.fillStyle.reset(r,g,b,255,rm,gm,bm,0);
-		mob.fillStyle.index = (int)random(binCount);
+		mob.strokeStyle.reset(r,g,b,255,rm,gm,bm,0);
+		mob.strokeStyle.index = (int)random(binCount);
 		mob.mode = mode;
 		mob.pv.P.z = v;
 	}
@@ -80,7 +80,6 @@ class ShapeTunnel extends ObjectPool<Shape> {
 		for (int i = 0 ; i < arm ; i ++) {
 			if (ar.get(i).p.p.z > w.z || ar.get(i).p.p.z < -w.z) {
 				remove(i);
-				println(i);
 				add();
 			}
 		}
@@ -90,8 +89,6 @@ class ShapeTunnel extends ObjectPool<Shape> {
 		push();
 		strokeWeight(w.x/400);
 		translate(p.x,p.y,p.z);
-		noStroke();
-		//stroke(255);
 		//box(w.x*2,w.y*2,w.z*2);
 		fill(0);
 		super.render();
@@ -99,10 +96,9 @@ class ShapeTunnel extends ObjectPool<Shape> {
 	}
 }
 
-class Shape extends Mob {
+class Shape extends MobF {
 	Point w;
 	int mode;
-	IColor fillStyle = new IColor();
 
 	Shape() {
 		this.p = new Point();
@@ -118,7 +114,6 @@ class Shape extends Mob {
 
 	void render() {
 		setDraw();
-		fillStyle.fillStyle();
 		switch(mode) {
 			case 0:
 			box(w.p.x,w.p.y,w.p.z);

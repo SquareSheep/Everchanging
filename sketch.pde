@@ -13,8 +13,8 @@ static float fftAmp = 2;
 static float volumeGain = -10;
 static String songName = "../Music/everchanging.mp3";
 
-IColor defaultFill = new IColor(222,125,222,255);
-IColor defaultStroke = new IColor(0,0,0,0);
+IColor defaultFill = new IColor(0,0,0,255);
+IColor defaultStroke = new IColor(255,255,255,255);
 
 CellBox cellBox;
 CubeShiftBox cubeBox;
@@ -93,7 +93,9 @@ void addEvents() {
 	
 	events.add(new SetDraws(161,true,false,false,false));
 
-	// Long melody 177-191
+	events.add(new SetDraws(176,false,false,false,true));
+	// Long melody 176-191
+	events.add(new SetDraws(191,true,false,false,false));
 }
 
 void setSketch() {
@@ -105,29 +107,60 @@ void setSketch() {
   	stroke(0);
   	strokeWeight(5);
 
-  	// cellBox = new CellBox(new PVector(0,0,0),size/6,8,8,8, 3,7,5,5);
-  	// mobs.add(cellBox);
+  	cellBox = new CellBox(new PVector(0,0,0),size/6,8,8,8, 3,7,5,5);
+  	mobs.add(cellBox);
 
-  	// cubeBox = new CubeShiftBox(new PVector(0,0,0), size,8,8,8, 175);
-  	// mobs.add(cubeBox);
+  	cubeBox = new CubeShiftBox(new PVector(0,0,0), size,8,8,8, 175);
+  	mobs.add(cubeBox);
 
-  	// hollowBox = new HollowCellBox(new PVector(0,0,0), size, 10, 2,3,3,3);
-  	// mobs.add(hollowBox);
+  	hollowBox = new HollowCellBox(new PVector(0,0,0), size, 8, 2,3,3,3);
+  	mobs.add(hollowBox);
 
-  	// ball = new PitchBall(new PVector(0,0,0), size/150);
-  	// mobs.add(ball);
+  	ball = new PitchBall(new PVector(0,0,0), size/150);
+  	mobs.add(ball);
 
-  	// wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
-  	// wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
-  	// mobs.add(wireBox);
-  	float w = de*0.5;
-  	float wd = de*0.1;
+  	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
+  	//wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
+  	//mobs.add(wireBox);
+  	float w = de*0.05;
+  	float wd = de*0.01;
   	cellTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
   		new PVector(w,w,w), new PVector(wd,wd,wd), 
-  		de*0.012,de*0.006,
-  		125,125,125, 55,55,55, 5,5,5, 1,1,1);
-  	for (int i = 0 ; i < 255 ; i ++) {
+  		de*0.004,de*0.002,
+  		200,75,75, 55,55,55, -5,-5,-5, 1,1,1);
+
+  	w = de*0.08;
+  	wd = de*0.02;
+  	cubeTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.003,de*0.002,
+  		25,200,25, 25,55,25, -5,-5,-5, 1,1,1);
+
+  	w = de*0.05;
+  	wd = de*0.04;
+  	hollowTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.006,de*0.002,
+  		100,25,200, 55,25,55, -5,-5,-5, 1,1,1);
+
+  	w = de*0.06;
+  	wd = de*0.03;
+  	ballTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.008,de*0.002,
+  		25,125,200, 25,55,55, -5,-5,-5, 1,1,1);
+
+  	for (int i = 0 ; i < 125 ; i ++) {
   		cellTunnel.add(random(-1,1));
+  	}
+  	for (int i = 0 ; i < 55 ; i ++) {
+  		cubeTunnel.add(random(-1,1));
+  	}
+  	for (int i = 0 ; i < 125 ; i ++) {
+  		hollowTunnel.add(random(-1,1));
+  	}
+  	for (int i = 0 ; i < 55 ; i ++) {
+  		ballTunnel.add(random(-1,1));
   	}
 
   	setTime(44141,62);
