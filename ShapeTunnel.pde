@@ -12,13 +12,16 @@ class ShapeTunnel extends ObjectPool<Shape> {
 	boolean spawn = true;
 	float wLimit = 0.75;
 
-	ShapeTunnel(PVector p, PVector w, PVector ws, PVector wd, float v, float vd, float r, float g, float b, 
+	ShapeTunnel(int num, PVector p, PVector w, PVector ws, PVector wd, float v, float vd, float r, float g, float b, 
 		float rd, float gd, float bd, float rm, float gm, float bm, float rmd, float gmd, float bmd) {
 		this.p = p; this.w = w; this.ws = ws; this.wd = wd; this.v = v; this.vd = vd;
 		this.r = r; this.g = g; this.b = b;
 		this.rd = rd; this.gd = gd; this.bd = bd;
 		this.rm = rm; this.gm = gm; this.bm = bm;
 		this.rmd = rmd; this.gmd = gmd; this.bmd = bmd;
+		for (int i = 0 ; i < num ; i ++) {
+			add(random(-1,1));
+		}
 	}
 
 	void set(Shape mob, float x, float y, float z, float w, float h, float d, float v, int mode, float r, float g, float b, float rm, float gm, float bm) {
@@ -87,12 +90,18 @@ class ShapeTunnel extends ObjectPool<Shape> {
 
 	void render() {
 		push();
-		strokeWeight(w.x/400);
+		strokeWeight(w.x/800);
 		translate(p.x,p.y,p.z);
 		//box(w.x*2,w.y*2,w.z*2);
 		fill(0);
 		super.render();
 		pop();
+	}
+
+	void fillStyleSetM(float r, float g, float b) {
+		for (int i = 0 ; i < ar.size() ; i ++) {
+			ar.get(i).fillStyle.setM(r,g,b,0, (float)i/arm*binCount);
+		}
 	}
 }
 

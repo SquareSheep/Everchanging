@@ -11,11 +11,11 @@ class CellBox extends Entity {
 	float cellVMult = 0.1;
 	float cellMass = 5;
 
-	int aliveMin = 4; int aliveMax = 7;
+	int aliveMin = 3; int aliveMax = 6;
 	int spawnMin = 5; int spawnMax = 5;
 
 	boolean cellReact = true;
-	float threshold = 15;
+	float threshold = 10;
 
 	CellBox(PVector p, float w, int x, int y, int z) {
 		this.p = new Point(p);
@@ -30,7 +30,7 @@ class CellBox extends Entity {
 				cells[i][k] = new Cell[z];
 				for (j = 0 ; j < z ; j ++) {
 					cells[i][k][j] = new Cell((float)i/x*125+125, (float)k/y*255, 255-(float)j/z*255,
-						5,5,5, (i*x+k*y+j)%binCount);
+						5,5,5, (i*x*y+k*y+j)%binCount);
 				}
 			}
 		}
@@ -44,6 +44,16 @@ class CellBox extends Entity {
 		this.spawnMax = spawnMax;
 	}
 
+	void fillStyleSetM(float rm, float gm, float bm) {
+		for (i = 0 ; i < x ; i ++) {
+			for (k = 0 ; k < y ; k ++) {
+				for (j = 0 ; j < z ; j ++) {
+					cells[i][k][j].fillStyle.setM(rm,gm,bm,0, (i*x*y+k*y+j)%binCount);
+				}
+			}
+		}
+	}
+
 	class Cell extends Entity {
 		int currShape = 0;
 		SpringValue sca = new SpringValue(0,cellVMult, cellMass);
@@ -53,7 +63,7 @@ class CellBox extends Entity {
 		IColor strokeStyle;
 
 		Cell(float r, float g, float b, float rm, float gm, float bm, float index) {
-			fillStyle = new IColor();
+			fillStyle = defaultFill.copy();
 			strokeStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
 		}
 
@@ -95,7 +105,7 @@ class CellBox extends Entity {
 		for (i = 1 ; i < x-1 ; i ++) {
 			for (k = 1 ; k < y-1 ; k ++) {
 				for (j = 1 ; j < z-1 ; j ++) {
-					if (cellReact && av[cells[i][k][j].strokeStyle.index] > threshold) cells[i][k][j].alive = true;
+					if (frameCount % 4 == 0 && cellReact && av[cells[i][k][j].strokeStyle.index] > threshold) cells[i][k][j].alive = true;
 					updateCell();
 				}
 			}

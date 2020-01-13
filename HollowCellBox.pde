@@ -41,4 +41,10 @@ class HollowCellBox extends Entity {
 			boxes[i].setRandom();
 		}
 	}
+
+	void fillStyleSetM(float r, float g, float b) {
+		for (int i = 0 ; i < boxes.length ; i ++) {
+			boxes[i].fillStyleSetM(r,g,b);
+		}
+	}
 }

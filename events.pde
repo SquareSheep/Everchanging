@@ -2,9 +2,76 @@
 	
 // }
 
+class Final extends Event {
+	float amp;
+	Final(float time, float timeEnd, float amp) {
+		super(time, timeEnd);
+		this.amp = amp;
+	}
+
+	void update() {
+		cellBox.p.P.x += sin((float)frameCount/fpb/4)*amp;
+		cubeBox.p.P.y += sin((float)frameCount/fpb/4)*amp;
+	}
+}
+
+class SetFill extends Event {
+	float amp;
+
+	SetFill(float time, float amp) {
+		super(time, time+1);
+		this.amp = amp;
+	}
+
+	void spawn() {
+		cellBox.fillStyleSetM(5*amp,3*amp,3*amp);
+		cubeBox.fillStyleSetM(2*amp,2*amp,5*amp);
+		hollowBox.fillStyleSetM(2*amp,2*amp,5*amp);
+		ball.fillStyleSetM(1*amp,3*amp,1*amp);
+		cellTunnel.fillStyleSetM(5*amp,2*amp,2*amp);
+		cubeTunnel.fillStyleSetM(2*amp,5*amp,2*amp);
+		hollowTunnel.fillStyleSetM(2*amp,2*amp,5*amp);
+		ballTunnel.fillStyleSetM(3*amp,3*amp,3*amp);
+		quietTunnel.fillStyleSetM(3*amp,3*amp,3*amp);
+		loudTunnel.fillStyleSetM(6*amp,6*amp,1*amp);
+		loud2Tunnel.fillStyleSetM(1*amp,6*amp,6*amp);
+		cellBox.w.pm.set(amp*cellBox.w.p.x*0.002,amp*cellBox.w.p.x*0.002,amp*cellBox.w.p.x*0.002);
+		cellBox.w.index = 0;
+		cubeBox.w.pm.set(amp*cubeBox.w.p.x*0.002,amp*cubeBox.w.p.x*0.002,amp*cubeBox.w.p.x*0.002);
+		cubeBox.w.index = 0;
+	}
+}
+
+class SetQuiet extends Event {
+	boolean quiet;
+	SetQuiet(float time, boolean quiet) {
+		super(time, time+1);
+		this.quiet = quiet;
+	}
+
+	void spawn() {
+		quietTunnel.draw = quiet;
+	}
+}
+
+class SetLoud extends Event {
+	boolean loud;
+	boolean loud2;
+	SetLoud(float time, boolean loud, boolean loud2) {
+		super(time, time+1);
+		this.loud = loud;
+		this.loud2 = loud2;
+	}
+
+	void spawn() {
+		loudTunnel.draw = loud;
+		loud2Tunnel.draw = loud2;
+	}
+}
+
 class SetDraws extends Event {
 	boolean cell; boolean cube; boolean hollow; boolean ring;
-	int mode;
+	int mode = 4;
 
 	SetDraws(float time, boolean cell, boolean cube, boolean hollow, boolean ring) {
 		super(time, time+1);
@@ -13,7 +80,7 @@ class SetDraws extends Event {
 		this.hollow = hollow;
 		this.ring = ring;
 		if (cell) mode = 0;
-		if (cube) mode = 1;
+		if (cube) mode = 0;
 		if (hollow) mode = 2;
 		if (ring) mode = 3;
 	}

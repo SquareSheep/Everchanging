@@ -16,6 +16,7 @@ static String songName = "../Music/everchanging.mp3";
 IColor defaultFill = new IColor(0,0,0,255);
 IColor defaultStroke = new IColor(255,255,255,255);
 
+ArrayList<ShapeTunnel> tunnels = new ArrayList<ShapeTunnel>();
 CellBox cellBox;
 CubeShiftBox cubeBox;
 HollowCellBox hollowBox;
@@ -25,6 +26,9 @@ ShapeTunnel cellTunnel;
 ShapeTunnel cubeTunnel;
 ShapeTunnel hollowTunnel;
 ShapeTunnel ballTunnel;
+ShapeTunnel quietTunnel;
+ShapeTunnel loudTunnel;
+ShapeTunnel loud2Tunnel;
 
 static float size;
 
@@ -38,64 +42,16 @@ void keyboardInput() {
 	} else if (key == '2') {
 		setTime(22940,32);
 	} else if (key == '3') {
-		setTime(44141,62);
+		setTime(63901,90);
 	} else if (key == '4') {
-		setTime(63901, 90);
+		setTime(90720, 128);
 	} else if (key == '5') {
 		setTime(113313, 160);
+	} else if (key == '6') {
+		setTime(134489, 190);
+	} else if (key == '7') {
+		setTime(166278, 235);
 	}
-}
-
-void addEvents() {
-	events.add(new CameraAngV(63,96, 0.001,0.002,-0.00081));
-	events.add(new SetDraws(61,true,false,false,false));
-	for (int i = 0 ; i < 6 ; i ++) {
-		events.add(new SetDraws(69 + i*4,false,true,false,false));
-		events.add(new CameraPAdd(69 + i*4, 0.3,0.3,0.3));
-		events.add(new CubeShiftNotes(69 + i*4));
-		events.add(new CameraPAdd(70.5 + i*4, -0.3,-0.3,-0.3));
-		events.add(new SetDraws(70.5 + i*4,true,false,false,false));
-	}
-	
-	events.add(new SetDraws(96.5,false,false,false,true));
-	events.add(new CameraPSet(96.5, 0,0,0));
-
-	events.add(new CameraAngV(96.5,124, 0,0,0.002));
-	events.add(new SetDraws(101,false,false,true,false));
-	events.add(new CameraPSet(101, 0,1.2,0.1));
-	events.add(new HollowSetRandom(101));
-	events.add(new HollowSetRandom(102));
-	events.add(new SetDraws(103,false,false,false,true));
-	events.add(new CameraPSet(103, 0,0,0));
-	events.add(new SetDraws(109,true,false,false,false));
-	events.add(new CameraPSet(109, -0.3,-0.5,0));
-	events.add(new SetDraws(113,false,false,false,true));
-	events.add(new CameraPSet(113, 0,0,0));
-	events.add(new SetDraws(117,false,false,true,false));
-	events.add(new CameraPSet(117, 0,1.2,0.1));
-	events.add(new HollowSetRandom(117));
-	events.add(new SetDraws(119,false,false,false,true));
-	events.add(new CameraPSet(119, 0,0,0));
-
-	events.add(new CameraAngV(124,129, 0,-0.0003,0.004));
-	events.add(new SetDraws(124,false,true,false,false));
-	events.add(new CubeShiftNotes(124, 4.5, 27));
-	events.add(new SetDraws(128.5,true,false,false,false));
-
-	events.add(new CameraAngV(129,177, 0,0.0003,-0.004));
-	for (int i = 0 ; i < 8 ; i ++) {
-		events.add(new SetDraws(129+i*4,false,true,false,false));
-		events.add(new CameraPAdd(129+i*4, 0.5,0.5,0.5));
-		events.add(new CubeShiftNotes(129+i*4));
-		events.add(new SetDraws(130.5+i*4,false,false,false,true));
-		events.add(new CameraPAdd(130.5+i*4, -0.5,-0.5,-0.5));
-	}
-	
-	events.add(new SetDraws(161,true,false,false,false));
-
-	events.add(new SetDraws(176,false,false,false,true));
-	// Long melody 176-191
-	events.add(new SetDraws(191,true,false,false,false));
 }
 
 void setSketch() {
@@ -122,46 +78,65 @@ void setSketch() {
   	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
   	//wireBox = new WireFrameBox(new PVector(0,0,0), size*3.75);
   	//mobs.add(wireBox);
+
   	float w = de*0.05;
   	float wd = de*0.01;
-  	cellTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  	cellTunnel = new ShapeTunnel(125, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
   		new PVector(w,w,w), new PVector(wd,wd,wd), 
   		de*0.004,de*0.002,
   		200,75,75, 55,55,55, -5,-5,-5, 1,1,1);
+  	tunnels.add(cellTunnel);
 
   	w = de*0.08;
   	wd = de*0.02;
-  	cubeTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  	cubeTunnel = new ShapeTunnel(55, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
   		new PVector(w,w,w), new PVector(wd,wd,wd), 
   		de*0.003,de*0.002,
   		25,200,25, 25,55,25, -5,-5,-5, 1,1,1);
+  	tunnels.add(cubeTunnel);
 
   	w = de*0.05;
   	wd = de*0.04;
-  	hollowTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  	hollowTunnel = new ShapeTunnel(125, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
   		new PVector(w,w,w), new PVector(wd,wd,wd), 
   		de*0.006,de*0.002,
   		100,25,200, 55,25,55, -5,-5,-5, 1,1,1);
+  	tunnels.add(hollowTunnel);
 
   	w = de*0.06;
   	wd = de*0.03;
-  	ballTunnel = new ShapeTunnel(new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  	ballTunnel = new ShapeTunnel(55, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
   		new PVector(w,w,w), new PVector(wd,wd,wd), 
   		de*0.008,de*0.002,
   		25,125,200, 25,55,55, -5,-5,-5, 1,1,1);
+  	tunnels.add(ballTunnel);
 
-  	for (int i = 0 ; i < 125 ; i ++) {
-  		cellTunnel.add(random(-1,1));
-  	}
-  	for (int i = 0 ; i < 55 ; i ++) {
-  		cubeTunnel.add(random(-1,1));
-  	}
-  	for (int i = 0 ; i < 125 ; i ++) {
-  		hollowTunnel.add(random(-1,1));
-  	}
-  	for (int i = 0 ; i < 55 ; i ++) {
-  		ballTunnel.add(random(-1,1));
-  	}
+  	w = de*0.26;
+  	wd = de*0.13;
+  	quietTunnel = new ShapeTunnel(90, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.004,de*0.001,
+  		125,125,125, 125,125,125, 10,10,10, 1,1,1);
+  	quietTunnel.draw = false; quietTunnel.wLimit = 0;
+  	tunnels.add(quietTunnel);
+
+  	w = de*0.36;
+  	wd = de*0.13;
+  	loudTunnel = new ShapeTunnel(155, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.014,de*0.005,
+  		125,255,125, 125,0,125, 10,-10,10, 1,1,1);
+  	loudTunnel.draw = false; loudTunnel.wLimit = 0;
+  	tunnels.add(loudTunnel);
+
+  	w = de*0.36;
+  	wd = de*0.13;
+  	loud2Tunnel = new ShapeTunnel(155, new PVector(width/2,height/2,-de*3.5), new PVector(de*2,de*2,de*4.3), 
+  		new PVector(w,w,w), new PVector(wd,wd,wd), 
+  		de*0.024,de*0.007,
+  		125,125,255, 125,0,125, 10,-10,10, 1,1,1);
+  	loud2Tunnel.draw = false; loud2Tunnel.wLimit = 0;
+  	tunnels.add(loud2Tunnel);
 
   	setTime(44141,62);
 }

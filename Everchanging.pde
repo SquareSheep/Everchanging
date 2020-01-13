@@ -58,16 +58,16 @@ void setup() {
 void draw() {
   background(0);
   fill(0);
-  wireBox.update();
-  if (wireBox.draw) wireBox.render();
-  cellTunnel.update();
-  if (cellTunnel.draw) cellTunnel.render();
-  cubeTunnel.update();
-  if (cubeTunnel.draw) cubeTunnel.render();
-  hollowTunnel.update();
-  if (hollowTunnel.draw) hollowTunnel.render();
-  ballTunnel.update();
-  if (ballTunnel.draw) ballTunnel.render();
+  if (wireBox.draw) {
+    wireBox.update();
+    wireBox.render();
+  }
+  for (ShapeTunnel mob : tunnels) {
+    if (mob.draw) {
+      mob.update();
+      mob.render();
+    }
+  }
 
   cam.render();
   update();

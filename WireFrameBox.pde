@@ -21,6 +21,7 @@ class WireFrameBox extends Mob {
 
 	void render() {
 		setDraw();
+		strokeWeight(width/800);
 		switch(mode) {
 			case 0:
 			stroke(100,25,175);

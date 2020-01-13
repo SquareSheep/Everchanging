@@ -12,11 +12,18 @@ class PitchBall extends Entity {
 		}
 	}
 
+	void fillStyleSetM(float rm, float gm, float bm) {
+		for (int i = 0 ; i < ar.length ; i ++) {
+			ar[i].fillStyle.setM(rm,gm,bm,0, (float)i/ar.length*binCount);
+		}
+	}
+
 	class Bar {
 		Point ang;
 		PVector dang;
 		Point w;
 		IColor fillStyle;
+		IColor strokeStyle;
 
 		Bar(PVector ang, float w, float r, float g, float b, float rm, float gm, float bm, float index) {
 			this.ang = new Point(ang);
@@ -25,7 +32,8 @@ class PitchBall extends Entity {
 			this.w = new Point(w*ampW,w*ampW,w*ampW*10);
 			this.w.pm.set(w/10,w/10,w);
 			this.w.index = (int)index;
-			fillStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
+			fillStyle = defaultFill.copy();
+			strokeStyle = new IColor(r,g,b,255, rm,gm,bm,0, index);
 		}
 	}
 
@@ -36,15 +44,18 @@ class PitchBall extends Entity {
 			ar[i].ang.update();
 			ar[i].w.update();
 			ar[i].fillStyle.update();
+			ar[i].strokeStyle.update();
 		}
 	}
 
 	void render() {
 		push();
 		translate(p.p.x,p.p.y,p.p.z);
+		strokeWeight(width/300);
 		for (int i = 0 ; i < ar.length ; i ++) {
 			push();
-			ar[i].fillStyle.strokeStyle();
+			ar[i].fillStyle.fillStyle();
+			ar[i].strokeStyle.strokeStyle();
 			rotateX(ar[i].ang.p.x);
 			rotateY(ar[i].ang.p.y);
 			rotateZ(ar[i].ang.p.z);
