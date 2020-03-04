@@ -57,7 +57,7 @@ void keyboardInput() {
 void setSketch() {
 	front = new PVector(de*2,de,de*1.5);
   	back = new PVector(-de*2,-de,-de*2);
-  	size = de*0.8;
+  	size = de*0.9;
   	textSize(90);
   	noiseSeed(0);
   	stroke(0);
@@ -72,7 +72,7 @@ void setSketch() {
   	hollowBox = new HollowCellBox(new PVector(0,0,0), size, 8, 2,3,3,3);
   	mobs.add(hollowBox);
 
-  	ball = new PitchBall(new PVector(0,0,0), size/150);
+  	ball = new PitchBall(new PVector(0,0,0), size/120);
   	mobs.add(ball);
 
   	wireBox = new WireFrameBox(new PVector(cam.p.p.x,cam.p.p.y,cam.p.p.z), size*3);
